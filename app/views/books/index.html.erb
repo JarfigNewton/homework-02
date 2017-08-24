@@ -2,8 +2,7 @@
 
 <% @books.each do |book| %>
   <div>
-    <h3><%= book.title + ' - ' + book.author %></h3>
-    <h5><%= book.genre + ', ' + book.classification + ', ' + book.book_type + ', ' + book.year %></h5>
+    <h3><%= link_to book.title + ' - ' + book.author, book_path(book) %></h3>
     <br />
   </div>
 <% end %>
