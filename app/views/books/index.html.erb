@@ -1,1 +1,7 @@
 <h1>Welcome to my Book Catalog app</h1>
+
+<% @books.each do |book| %>
+  <div>
+    <h3><%= book.title + ' - ' + book.author %></h3>
+  </div>
+<% end %>
