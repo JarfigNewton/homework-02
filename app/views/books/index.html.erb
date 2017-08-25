@@ -1,5 +1,12 @@
 <h1>Welcome to my Book Catalog app</h1>
 
+
+<%= form_tag("/books", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
 <% @books.each do |book| %>
   <div>
     <h3><%= link_to book.title + ' - ' + book.author, book_path(book) %></h3>

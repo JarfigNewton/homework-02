@@ -1,7 +1,17 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.order("title")
+    @books = 
+    if params[:q].present?
+      results_title = Book.where('title ILIKE ?', "%#{params[:q]}%").order("title")
+      results_author = Book.where('author ILIKE ?', "%#{params[:q]}%").order("title")
+      results_genre = Book.where('genre ILIKE ?', "%#{params[:q]}%").order("title")
+      results_classification = Book.where('classification ILIKE ?', "%#{params[:q]}%").order("title")
+      results_book_type = Book.where('book_type ILIKE ?', "%#{params[:q]}%").order("title")
+      results_title + results_author + results_genre + results_classification + results_book_type
+    else
+      Book.order("title")
+    end
   end
 
   def new

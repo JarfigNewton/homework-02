@@ -5,7 +5,7 @@
   <%= 'Genre: ' + @book.genre %><br />
   <%= 'Classification: ' + @book.classification %><br />
   <%= 'Type: ' + @book.book_type %><br />
-  <%= 'Year: ' + @book.year %>
+  <%= 'Year: ' + @book.year.to_s %>
 </p>
 <br />
 <%= link_to 'Edit Book Details', edit_book_path(@book) %><br />
