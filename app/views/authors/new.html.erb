@@ -1,0 +1,8 @@
+<h1>Enter Author Details</h1>
+<%= simple_form_for @author do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :age %>
+  <br />
+  <%= f.submit 'Create' %>
+<% end %>

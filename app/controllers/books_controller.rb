@@ -4,11 +4,11 @@ class BooksController < ApplicationController
     @books = 
     if params[:q].present?
       results_title = Book.where('title ILIKE ?', "%#{params[:q]}%").order("title")
-      results_author = Book.where('author ILIKE ?', "%#{params[:q]}%").order("title")
+      # results_author = Book.where('author ILIKE ?', "%#{params[:q]}%").order("title")
       results_genre = Book.where('genre ILIKE ?', "%#{params[:q]}%").order("title")
       results_classification = Book.where('classification ILIKE ?', "%#{params[:q]}%").order("title")
       results_book_type = Book.where('book_type ILIKE ?', "%#{params[:q]}%").order("title")
-      results_title + results_author + results_genre + results_classification + results_book_type
+      results_title + results_genre + results_classification + results_book_type # + results_author
     else
       Book.order("title")
     end
@@ -25,7 +25,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @authorship = @book.authorships.id
+    @authorship = Authorship.find(@book.id)
+    @author = Author.find(@authorship.author_id)
   end
 
   def edit

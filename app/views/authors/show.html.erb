@@ -1,2 +1,17 @@
-<h1>Author's Page</h1>
+<h1 class="author"><%= @author.first_name + ' ' + @author.last_name %></h3>
+<h3 class="age"><%= 'Age: ' + @author.age.to_s %></h3>
+<br />
 
+<h3>Books Written:</h3>
+<% @authorship.each do |authorship| %>
+  <div>
+    <p>
+      <% @book = Book.find(authorship.book_id) %>
+      <%= link_to @book.title, book_path(@book) %>
+    </p>
+  </div>
+<% end %>
+
+<br /><br />
+<%= link_to 'Edit Author Details', edit_author_path(@author) %><br />
+<%= link_to 'Delete Author', author_path(@author), method: :delete, data: {confirm: 'Are you sure you want to delete this?'} %>

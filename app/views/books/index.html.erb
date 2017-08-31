@@ -9,8 +9,10 @@
 
 <% @books.each do |book| %>
   <div>
-    <h3><%= link_to book.title, book_path(book) %></h3><h3> - </h3>
-    <h3><%= link_to book.authors, author_path(book) %><h3>
+    <h3><%= link_to book.title, book_path(book) %> - 
+    <% @authorship = Authorship.find(book.id) %>
+    <% @author = Author.find(@authorship.author_id) %>
+    <%= link_to @author.first_name + ' ' + @author.last_name, author_path(@author) %></h3>
     <br />
   </div>
 <% end %>

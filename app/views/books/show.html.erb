@@ -1,6 +1,6 @@
 <h1 class="title"><%= @book.title %></h1>
 <h3 class="sub_title"><%= @book.sub_title %></h3>
-<h3><i><%= @authorship.last_name %></i></h3>
+<h3><i><%= link_to @author.first_name + ' ' + @author.last_name, author_path(@author) %></i></h3>
 <br />
 <p>
   <%= 'Genre: ' + @book.genre %><br />
@@ -8,6 +8,6 @@
   <%= 'Type: ' + @book.book_type %><br />
   <%= 'Year: ' + @book.year.to_s %>
 </p>
-<br />
+<br /><br />
 <%= link_to 'Edit Book Details', edit_book_path(@book) %><br />
 <%= link_to 'Delete Book', book_path(@book), method: :delete, data: {confirm: 'Are you sure you want to delete this?'} %>
