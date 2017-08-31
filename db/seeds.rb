@@ -32,13 +32,29 @@ classification = [
   'Bibliography and Library Science'
 ]
 
+25.times do |item|
+  Author.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    age: Faker::Number.between(12, 85)
+  )
+end
+
 50.times do |item|
   Book.create!(
     title: Faker::Book.title,
-    author: Faker::Book.author,
     genre: Faker::Book.genre,
     classification: classification.sample,
     book_type: book_type.sample,
-    year: Faker::Number.between(1700, 2017)
+    year: Faker::Number.between(1700, 2017),
+    sub_title: Faker::LordOfTheRings.location
+  )
+end
+
+Book.all.each do |book|
+  author_id = Author.all.sample.id
+  Authorship.create!(
+    book_id: book.id,
+    author_id: author_id
   )
 end
