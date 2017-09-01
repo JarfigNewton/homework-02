@@ -3,12 +3,17 @@ class BooksController < ApplicationController
   def index
     @books = 
     if params[:q].present?
-      results_title = Book.where('title ILIKE ?', "%#{params[:q]}%").order("title")
-      # results_author = Book.where('author ILIKE ?', "%#{params[:q]}%").order("title")
-      results_genre = Book.where('genre ILIKE ?', "%#{params[:q]}%").order("title")
-      results_classification = Book.where('classification ILIKE ?', "%#{params[:q]}%").order("title")
-      results_book_type = Book.where('book_type ILIKE ?', "%#{params[:q]}%").order("title")
-      results_title + results_genre + results_classification + results_book_type # + results_author
+      results_book = Book.where('title ILIKE ? OR genre ILIKE ? OR classification ILIKE ? OR book_type ILIKE ? OR sub_title ILIKE ?', "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%").order("title")
+      results_author = Author.where('first_name ILIKE ? OR last_name ILIKE ?', "%#{params[:q]}%", "%#{params[:q]}%").all
+      books_by_authors = []
+      results_author.each do |author|
+        author_books = author.books
+        author_books.each do |book|
+          books_by_authors << book
+        end
+      end
+
+      results_book + books_by_authors
     else
       Book.order("title")
     end
@@ -25,8 +30,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @authorship = Authorship.find(@book.id)
-    @author = Author.find(@authorship.author_id)
+    @authors = @book.authors
   end
 
   def edit

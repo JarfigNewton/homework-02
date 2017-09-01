@@ -1,6 +1,8 @@
 <h1 class="title"><%= @book.title %></h1>
 <h3 class="sub_title"><%= @book.sub_title %></h3>
-<h3><i><%= link_to @author.first_name + ' ' + @author.last_name, author_path(@author) %></i></h3>
+<% @authors.each do |author| %>
+  <h3><i><%= link_to author.full_name, author_path(author) %></i></h3>
+<% end %>
 <br />
 <p>
   <%= 'Genre: ' + @book.genre %><br />

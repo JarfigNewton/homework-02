@@ -11,13 +11,7 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find(params[:id])
-    @authorships = Authorship.all
-    @authorship = []
-    @authorships.each do |authorship|
-      if @author.id == authorship.author_id
-        @authorship << authorship
-      end
-    end
+    @books = @author.books
   end
 
   def edit

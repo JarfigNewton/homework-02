@@ -1,13 +1,12 @@
-<h1 class="author"><%= @author.first_name + ' ' + @author.last_name %></h3>
+<h1 class="author"><%= @author.full_name %></h3>
 <h3 class="age"><%= 'Age: ' + @author.age.to_s %></h3>
 <br />
 
 <h3>Books Written:</h3>
-<% @authorship.each do |authorship| %>
+<% @books.each do |book| %>
   <div>
     <p>
-      <% @book = Book.find(authorship.book_id) %>
-      <%= link_to @book.title, book_path(@book) %>
+      <%= link_to book.title, book_path(book) %>
     </p>
   </div>
 <% end %>
