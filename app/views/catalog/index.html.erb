@@ -1,7 +1,7 @@
 <h1>Welcome to the Bookster Book Catalog</h1>
 
 
-<%= form_tag("/books", method: "get") do %>
+<%= form_tag("/catalog", method: "get") do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>
